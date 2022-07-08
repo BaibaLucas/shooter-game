@@ -63,7 +63,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Illustration ravenskill Screen Shot][product-screenshot]](./images/illust.png)
+[![Illustration ravenskill Screen Shot][product-screenshot]](./illust.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
