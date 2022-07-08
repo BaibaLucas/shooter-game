@@ -1,24 +1,28 @@
-// Ravens
+// Ravens canvas
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-// Background
+// Collision canvas
 const collisionCanvas = document.getElementById('collisionCanvas');
 const collisionCtx = collisionCanvas.getContext('2d');
 collisionCanvas.width = window.innerWidth;
 collisionCanvas.height = window.innerHeight;
 
-
-let score = 0;
-let gameOver = false;
+// Fonts
 ctx.font = '50px Impact';
+// Score
+let score = 0;
+// Game over
+let gameOver = false;
 
+// Ravens pop base
 let timeToNextRaven = 0;
 let ravenInterval = 500;
 let lastTime = 0;
 
 let ravens = [];
+
 class Raven {
     constructor(){
         this.spriteWidth = 271;
@@ -40,7 +44,9 @@ class Raven {
         this.randomColors = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
         this.color = 'rgb(' + this.randomColors[0] + ',' + this.randomColors[1] + ',' + this.randomColors[2] + ')';
     }
+
     update(deltatime){
+        // If raven touch top or bottom border, bounce opposite
         if (this.y < 0 || this.y > canvas.height - this.height){
             this.directionY = this.directionY * -1;
         }
@@ -55,12 +61,15 @@ class Raven {
         }
         if (this.x < 0 - this.width) gameOver = true;
     }
+
     draw(){
         collisionCtx.fillStyle = this.color;
         collisionCtx.fillRect(this.x, this.y, this.width, this.height);
         ctx.drawImage(this.image, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
     }
 }
+
+// Explosions on Click;
 let explosions = [];
 class Explosion {
     constructor(x, y, size) {
@@ -92,12 +101,15 @@ class Explosion {
     }
 }
 
+// Display Score
 function drawScore(){
     ctx.fillStyle = 'black';
     ctx.fillText('Score: ' + score, 50, 75);
     ctx.fillStyle = 'white';
     ctx.fillText('Score: ' + score, 55, 80);
 }
+
+// loose function : play sound + onClick refresh page for retry
 function drawGameOver(){
     let audioEnd = new Audio('game_over.mp3');
     audioEnd.play();
@@ -115,7 +127,8 @@ function drawGameOver(){
         window.location.reload();
     }
 }
- 
+
+// kill ravens (If background color = Raven color then kill.)
 window.addEventListener('click', function(e) {
     const detectPixelColor = collisionCtx.getImageData(e.x, e.y, 1, 1);
     const pc = detectPixelColor.data;
@@ -129,6 +142,7 @@ window.addEventListener('click', function(e) {
     });
 });
 
+// Launching game
 function animate(timestamp) {
     ctx.clearRect(0,0, canvas.width, canvas.height);
     collisionCtx.clearRect(0,0, canvas.width, canvas.height);
