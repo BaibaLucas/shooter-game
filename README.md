@@ -16,7 +16,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/BaibaLucas/shooter-game">
-    <img src="./illust.jpg" alt="illust" width="400" height="300">
+    <img src="./illust.png" alt="illust" width="400" height="300">
   </a>
 
 <h3 align="center">Shooter Javascript</h3>
