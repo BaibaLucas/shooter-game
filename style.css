@@ -12,5 +12,5 @@ canvas {
     height: 100%;
 }
 #collisionCanvas {
-    
+    opacity: 0;
 }
